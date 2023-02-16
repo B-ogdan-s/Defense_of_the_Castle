@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Archer", menuName = "Detachment/Archer")]
-public class Archer : Detachment
+public class Archer : Detachment, IDetachmentSpawn
 {
-    [SerializeField] private GameObject _onionPrefab;
-    [SerializeField] private GameObject _arrowPrefab;
+    [SerializeField] private PrefabInfo _onionPrefab;
+    [SerializeField] private PrefabInfo _arrowPrefab;
 
     [SerializeField] private Archer _nextLevel;
 
-    public GameObject OnionPrefab => _onionPrefab;
-    public GameObject ArrowPrefab => _arrowPrefab;
+    public PrefabInfo OnionPrefab => _onionPrefab;
+    public PrefabInfo ArrowPrefab => _arrowPrefab;
 
     public Archer NextLevel => _nextLevel;
+
+    public void Spawn(Vector3 position)
+    {
+        Debug.Log("Archer");
+    }
 }
