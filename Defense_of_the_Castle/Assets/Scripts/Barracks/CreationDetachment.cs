@@ -9,7 +9,7 @@ public class CreationDetachment : MonoBehaviour
 
     [SerializeField] private Barrack[] _barracks;
 
-    private int _detachmentNum = 0;
+    [SerializeField] private int _detachmentNum = 0;
 
     private void Start()
     {
