@@ -6,20 +6,10 @@ using UnityEngine;
 
 public abstract class Detachment : ScriptableObject
 {
-    [SerializeField] private int _level;
-    [SerializeField] private int _health;
-    [SerializeField] private int _attack;
-    [SerializeField] private float _timeAttack;
-    [SerializeField] private float _attackRange;
-    [SerializeField] private int _numSoldiers;
+    [SerializeField] private int _troopCount;
     [SerializeField] private PrefabInfo _detachmentPrefab;
 
-    public int Level => _level;
-    public int Health => _health;
-    public int Attack => _attack;
-    public float TimeAttack => _timeAttack;
-    public float AttackRange => _attackRange;
-    public int NumSoldiers => _numSoldiers;
+    public int TroopCount => _troopCount;
     public PrefabInfo DetachmentPrefab => _detachmentPrefab;
 }
 

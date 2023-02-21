@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine
+public class UnitBehaviourStateMachine
 {
     private State currentState;
 
@@ -45,11 +45,11 @@ public class StateMachine
 
 public abstract class State
 {
-    public abstract string Id { get; }
+    public abstract string Name { get; }
 
-    public virtual void Enter() { }
+    public abstract void Enter();
 
-    public virtual void Update() { }
+    public abstract void Update();
 
-    public virtual void Exit() { }
+    public abstract void Exit();
 }
