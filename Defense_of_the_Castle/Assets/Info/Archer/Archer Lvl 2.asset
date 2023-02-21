@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9744abfe5b8619e40a77556eb89893cd, type: 3}
   m_Name: Archer Lvl 2
   m_EditorClassIdentifier: 
-  _level: 1
+  _level: 2
   _health: 0
   _attack: 0
   _timeAttack: 0
-  _numSoldiers: 0
-  _detachmentPrefab: {fileID: 0}
-  _onionPrefab: {fileID: 0}
-  _arrowPrefab: {fileID: 0}
-  _nextLevel: {fileID: 11400000, guid: 3297832244c4d8142821209d7d685834, type: 2}
+  _numSoldiers: 1
+  _detachmentPrefab:
+    _prefab: {fileID: 8176576210237849382, guid: ba5451e782276154bb5256d5e0572ce7, type: 3}
+    _material: {fileID: 2100000, guid: 7dd4b28240acbe34cbb358b16e1fe853, type: 2}
+  _onionPrefab:
+    _prefab: {fileID: 0}
+    _material: {fileID: 0}
+  _arrowPrefab:
+    _prefab: {fileID: 0}
+    _material: {fileID: 0}

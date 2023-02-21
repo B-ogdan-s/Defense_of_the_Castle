@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d893e1b9b6dc4f479dc57cec43e90bb, type: 3}
   m_Name: Warrior Lvl 2
   m_EditorClassIdentifier: 
-  _level: 1
+  _level: 2
   _health: 0
   _attack: 0
   _timeAttack: 0
-  _numSoldiers: 0
-  _detachmentPrefab: {fileID: 0}
-  _swordPrefab: {fileID: 0}
-  _nextLevel: {fileID: 11400000, guid: b86d2a0a6ed70354c9a638dbb89c3376, type: 2}
+  _numSoldiers: 1
+  _detachmentPrefab:
+    _prefab: {fileID: 8176576210237849382, guid: ba5451e782276154bb5256d5e0572ce7, type: 3}
+    _material: {fileID: 2100000, guid: facd731f04fe8344bb5a44299e3c9326, type: 2}
+  _speed: 0
+  _swordPrefab:
+    _prefab: {fileID: 0}
+    _material: {fileID: 0}

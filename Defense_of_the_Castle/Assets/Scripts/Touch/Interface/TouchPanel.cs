@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.PlayerSettings;
 
 public class TouchPanel : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
+    [SerializeField] private LayerMask _mask;
     private ITouch _touch;
 
     public void OnPointerDown(PointerEventData eventData)
@@ -13,22 +13,25 @@ public class TouchPanel : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
         _touch = TouchRay(eventData.position);
 
         if (_touch != null)
-            _touch.TouchDown();
+        {
+            _touch.TouchDown(eventData.position);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_touch == TouchRay(eventData.position) && _touch != null)
+        if (_touch != null)
         {
-            _touch.TouchHandler();
+            _touch.TouchHandler(eventData.position);
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (_touch == TouchRay(eventData.position) && _touch != null)
+        if (_touch != null)
         {
-            _touch.TouchUp();
+            _touch.TouchUp(eventData.position);
+            _touch = null;
         }
     }
 
@@ -36,7 +39,7 @@ public class TouchPanel : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     {
         Ray ray = Camera.main.ScreenPointToRay(pos);
 
-        if(Physics.Raycast(ray, out RaycastHit hit))
+        if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _mask))
         {
             if(hit.transform.TryGetComponent(out ITouch touch))
                 return touch;

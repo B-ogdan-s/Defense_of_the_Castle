@@ -6,42 +6,32 @@ using UnityEngine;
 public class Barrack : MonoBehaviour, ITouch
 {
     [SerializeField] private Transform _spawnPosition;
-    [SerializeField] private Detachment _iDetachment;
+    [SerializeField] private DetachmentInfo[] _detachment;
 
-    private IDetachmentSpawn _iDetachmentSpawn;
+    public DetachmentInfo Detachment => _detachment[0];
 
-    public Action<Barrack> CheckFreeTroops;
+    public Action<Barrack, System.Func<int, DetachmentInfo>> CheckFreeTroops;
 
-    public void Spawn()
-    {
-        _iDetachmentSpawn.Spawn(_spawnPosition.position);
-    }
-
-    public void TouchDown()
+    public void TouchDown(Vector2 down)
     {
 
     }
 
-    public void TouchHandler()
+    public void TouchHandler(Vector2 handler)
     {
 
     }
 
-    public void TouchUp()
+    public void TouchUp(Vector2 up)
     {
-        CheckFreeTroops?.Invoke(this);
+        CheckFreeTroops?.Invoke(this, Merge);
     }
 
-    private void OnValidate()
+    private DetachmentInfo Merge(int level)
     {
-        if(_iDetachment is IDetachmentSpawn)
-        {
-            _iDetachmentSpawn = (IDetachmentSpawn)_iDetachment;
-        }
-        else
-        {
-            _iDetachmentSpawn = null;
-            _iDetachment = null;
-        }
+        if (level >= _detachment.Length)
+            return null;
+
+        return _detachment[level];
     }
 }
