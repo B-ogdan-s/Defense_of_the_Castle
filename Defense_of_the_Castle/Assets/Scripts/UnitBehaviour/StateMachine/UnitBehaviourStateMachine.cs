@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitBehaviourStateMachine
+public class UnitBehaviourStateMachine : IStateSwitcher
 {
     private State currentState;
 
@@ -45,6 +45,13 @@ public class UnitBehaviourStateMachine
 
 public abstract class State
 {
+    protected Unit _unit;
+    protected IStateSwitcher _stateSwitcher;
+    public State(Unit unit, IStateSwitcher stateSwitcher)
+    {
+        _unit = unit;
+        _stateSwitcher = stateSwitcher;
+    }
     public abstract string Name { get; }
 
     public abstract void Enter();

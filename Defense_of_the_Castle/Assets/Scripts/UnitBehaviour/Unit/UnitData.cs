@@ -7,10 +7,12 @@ public abstract class UnitData : ScriptableObject
     [SerializeField] private float _attackCooldown;
     [SerializeField] private float _attackRange;
     [SerializeField] private float _targetDetectionRadius;
+    [SerializeField] private LayerMask _enemyLayer;
 
     public int Level => _level;
     public float Damage => _damage;
     public float AttackCooldown => _attackCooldown;
     public float AttackRange => _attackRange;
     public float TargetDetectionRadius => _targetDetectionRadius;
+    public LayerMask EnemyLayer => _enemyLayer;
 }

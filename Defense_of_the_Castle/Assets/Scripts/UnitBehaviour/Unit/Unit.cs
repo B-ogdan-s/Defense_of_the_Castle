@@ -5,18 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public abstract class Unit : MonoBehaviour
 {
-    [SerializeField] protected UnitData _data;
+    [SerializeField] private UnitData _data;
     [SerializeField] private Transform _baseTarget;
-    public Transform BaseTarget => _baseTarget;
-
-    private Transform _closestTarget;
-    public Transform ClosestTarget => _closestTarget;
+    public UnitData Data => _data;
+    public TargetDetection TargetDetection { get; private set; }
 
     protected UnitBehaviourStateMachine _stateMachine;
+
     private SphereCollider _detectionCollider;
+
     protected abstract void Initialize();
     private void BaseInitialize()
     {
+        TargetDetection = new TargetDetection(_baseTarget, this, _data.EnemyLayer, _data.TargetDetectionRadius);
         _detectionCollider.radius = _data.TargetDetectionRadius;
         Initialize();
     }
@@ -28,15 +29,7 @@ public abstract class Unit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out IDamageble damageble))
-        {
-            //if (CheckDistanceToTarget(other.transform.position))
-            //    _closestTarget = other.transform;
-        }
+        if (other.gameObject.layer == _data.EnemyLayer)
+            TargetDetection.CompareTarget(other.transform);
     }
-
-    //private bool CheckDistanceToTarget(Vector3 targetPosition)
-    //{
-    //    if(Vector3.Distance(transform.position, targetPosition))
-    //}
 }

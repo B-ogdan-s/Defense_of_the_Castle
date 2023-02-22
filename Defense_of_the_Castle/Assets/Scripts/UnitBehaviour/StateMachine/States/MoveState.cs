@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class MoveState : State
 {
     private IMoveble _moveble;
-    private Unit _unit;
-    public MoveState(IMoveble moveble, Unit unit)
+    private Transform _target;
+    public MoveState(Unit unit, IStateSwitcher stateSwitcher, IMoveble moveble) : base(unit, stateSwitcher)
     {
         Name = "MoveState";
         _moveble = moveble;
@@ -17,21 +18,31 @@ public class MoveState : State
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        _target = GetTarget();
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        _target = null;
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        if (_target == null)
+        {
+            _target = _unit.TargetDetection.SetNewTarget();
+        }
+        else
+        {
+            if (Vector3.Distance(_unit.transform.position, _target.position) > _unit.Data.AttackRange)
+                _moveble.MoveToTarget(_target);
+            else
+                _stateSwitcher.ChangeState<AttackState>();
+        }
     }
 
-    //private Transform GetTarget()
-    //{
-    //    if(_unit.AccessibleTargets.Count > 0)
-    //}
+    protected virtual Transform GetTarget()
+    {
+        return _unit.TargetDetection.ClosestTarget;
+    }
 }
